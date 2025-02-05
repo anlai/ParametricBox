@@ -1,0 +1,27 @@
+{
+    "fileFormatVersion": "1",
+    "parameterSets": {
+        "New set 1": {
+            "gf_depth": "5",
+            "gf_height": "6",
+            "gf_width": "5",
+            "stackable": "false",
+            "std_depth": "40",
+            "std_height": "40",
+            "std_width": "40",
+            "type": "gridfinity",
+            "wall_thickness": "4"
+        },
+        "New set 2": {
+            "gf_depth": "5",
+            "gf_height": "6",
+            "gf_width": "5",
+            "stackable": "false",
+            "std_depth": "40",
+            "std_height": "40",
+            "std_width": "40",
+            "type": "gridfinity",
+            "wall_thickness": "8"
+        }
+    }
+}
