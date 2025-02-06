@@ -11,14 +11,19 @@ top_wall_thickness = 2;
 // bottom wall thickness (when not stackable)
 bottom_wall_thickness = 2;
 
+fudge = .1; // [1:.1:5]
+
 /* [Gridfinity Parameters] */
 gf_width = 5;
 gf_depth = 5;
 gf_height = 6;
 
 /* [Standard Parameters] */
+// inside width
 std_width = 40;
+// inside depth
 std_depth = 40;
+// inside height
 std_height = 40;
 
 module __Customizer_Limit__ () {}
