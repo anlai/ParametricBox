@@ -11,7 +11,7 @@ GF_BASEPLATE_UNIT_SIZE = 42;
 GF_BASEPLATE_HEIGHT = 5;
 GF_BASEPLATE_ROUNDNESS = 8;
 
-function calculate_magnet(d, h) = magnet_diameter > 0 && magnet_height > 0 ? [magnet_diameter, magnet_height] : [0,0];
+function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
 module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wall_thickness, fudge, magnet_size) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
