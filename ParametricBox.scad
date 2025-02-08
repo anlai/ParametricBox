@@ -64,4 +64,9 @@ if (type == "gridfinity") {
     if (stackable) {
         lip(std_width, std_depth, lip_height, wall_thickness, roundness, roundness, fudge);
     }
+
+    translate([0, -(std_depth/2+wall_thickness), label_z_offset(std_height + (stackable ? lip_height : 0), bottom_wall_thickness, 70)])
+    label_holder(130, 70);
 }
+
+function label_z_offset(height, bottom_wall_thickness, label_height) = ((height+bottom_wall_thickness)-label_height)/2;
