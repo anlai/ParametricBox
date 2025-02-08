@@ -121,8 +121,8 @@ module lip(w, d, h, wall_thickness, inner_roundness, outer_roundness, fudge) {
     thickness = wall_thickness * 2;
     outer_w = w + thickness;
     outer_d = d + thickness;
-    inner_w = w + (thickness/2) - fudge;
-    inner_d = d + (thickness/2) - fudge;
+    inner_w = w + (thickness/2) + fudge;
+    inner_d = d + (thickness/2) + fudge;
 
     union() {
         difference() {
