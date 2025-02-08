@@ -40,6 +40,26 @@
             "top_wall_thickness": "2",
             "type": "gridfinity",
             "wall_thickness": "6"
+        },
+        "New set 4": {
+            "bottom_wall_thickness": "2",
+            "fudge": "0.10000000000000001",
+            "gf_depth": "5",
+            "gf_height": "6",
+            "gf_lid_bottom_grid": "true",
+            "gf_lid_top_grid": "false",
+            "gf_magnet_diameter": "6.0999999999999996",
+            "gf_magnet_height": "2",
+            "gf_width": "5",
+            "lip_height": "5",
+            "roundness": "8",
+            "stackable": "false",
+            "std_depth": "150",
+            "std_height": "100",
+            "std_width": "150",
+            "top_wall_thickness": "2",
+            "type": "standard",
+            "wall_thickness": "6"
         }
     }
 }

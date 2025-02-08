@@ -131,3 +131,32 @@ module lip(w, d, h, wall_thickness, inner_roundness, outer_roundness, fudge) {
         }
     }
 }
+
+module label_holder(w, h) {
+    z = 5;
+    chamfer_height = 2;
+
+    excess_height = z-chamfer_height;
+    excess_offset = excess_height/2;
+
+    label_frame = 6;
+    label_thickness = 1;
+
+    rotate([90, 0, 0])
+    translate([0, h/2, -(excess_offset+(1.5*label_thickness))]) // position to be 0 against the x/z-axis
+    difference(){
+        // frame
+        rounded_rectangle(w, h, z, 8, 45, chamfer_height);
+        // remove excess required for rendering
+        translate([0, 0, excess_offset])
+        cube([w, h, excess_height], center=true);
+
+        // remove spacing for label
+        translate([0, label_frame/2, excess_offset+(2*label_thickness)])
+        cube([w-label_frame, h-label_frame, label_thickness+.1],center=true);
+
+        // remove window for label
+        translate([0, 1.5*label_frame, excess_offset+(2*label_thickness)])
+        cube([w-(2*label_frame), h, z], center=true);
+    }
+}
