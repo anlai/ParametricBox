@@ -39,7 +39,7 @@ if (type == "gridfinity") {
     magnet_size = calculate_magnet(gf_magnet_diameter, gf_magnet_height);
 
     translate([-(gf_width*42)-20, 0, 0])
-    gridfinity_lid(gf_width, gf_depth, wall_thickness, top_wall_thickness, gf_lid_top_grid, gf_lid_bottom_grid, magnet_size);
+    gridfinity_lid(gf_width, gf_depth, wall_thickness, top_wall_thickness, gf_lid_top_grid, gf_lid_bottom_grid, magnet_size, fudge);
 
     gridfinity_box(gf_width, gf_depth, gf_height, wall_thickness, stackable, bottom_wall_thickness, magnet_size);
 }

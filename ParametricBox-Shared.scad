@@ -68,19 +68,41 @@ module cylinder_chamfer(d, h, chamfer_top_angle = 0, chamfer_top_height = 0, cha
         lip_height: height of the cutout to fit the lid
         fudge: fudge factor for fitment, gets subtracted (makes it thicker)
 **/
-module body(w, d, h, wall_thickness, inner_roundness, outer_roundness, lip_height, fudge) {
-    thickness = wall_thickness * 2; // account for 2 walls
-    outer_w = w + thickness;
-    outer_d = d + thickness;
-    
+module body(w, d, h, wall_thickness, bottom_wall_thickness, inner_roundness, outer_roundness, lip_height) {
     difference() {
-        // outer side
-        rounded_rectangle(outer_w, outer_d, h, outer_roundness);
-        // inside cutout
-        rounded_rectangle(w, d, h, inner_roundness);
+        // shell + bottom
+        union() {
+            // inner shell + lip
+            rounded_rectangle(w+wall_thickness, d+wall_thickness, h+bottom_wall_thickness, outer_roundness);
+            // outer shell
+            rounded_rectangle(
+                w+(2*wall_thickness),
+                d+(2*wall_thickness),
+                h+bottom_wall_thickness-lip_height,
+                outer_roundness,
+                chamfer_top_angle=75,
+                chamfer_top_height=2
+                );
+        }
 
-        translate([0, 0, h-lip_height])
-        lip(w, d, lip_height, wall_thickness, inner_roundness, outer_roundness, fudge);
+        // cutout for the inside cavity
+        translate([0, 0, bottom_wall_thickness])
+        rounded_rectangle(w, d, h, inner_roundness);        
+    }
+}
+
+module lid(w, d, wall_thickness, top_thickness, inner_roundness, outer_roundness, lip_height, fudge) {
+    difference() {
+        rounded_rectangle(
+            w+(2*wall_thickness), 
+            d+(2*wall_thickness), 
+            lip_height+top_thickness,
+            outer_roundness,
+            chamfer_top_angle=45,
+            chamfer_top_height=2
+            );
+
+        rounded_rectangle(w+wall_thickness+fudge, d+wall_thickness+fudge, lip_height, inner_roundness);
     }
 }
 

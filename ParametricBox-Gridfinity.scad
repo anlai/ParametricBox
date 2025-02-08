@@ -20,27 +20,8 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wa
 
     translate([0, 0, stackable ? GF_LIP_HEIGHT : 0])
     union() {
-        difference() {
-            // shell + bottom
-            union() {
-                // inner shell + lip
-                rounded_rectangle(w+wall_thickness, d+wall_thickness, h+bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS);
-                // outer shell
-                rounded_rectangle(
-                    w+(2*wall_thickness),
-                    d+(2*wall_thickness),
-                    h+bottom_wall_thickness-GF_LIP_HEIGHT,
-                    GF_BASEPLATE_ROUNDNESS,
-                    chamfer_top_angle=75,
-                    chamfer_top_height=2
-                    );
-            }
+        body(w, d, h, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
 
-            // cutout for the inside cavity
-            translate([0, 0, bottom_wall_thickness])
-            rounded_rectangle(w, d, h, GF_BASEPLATE_ROUNDNESS);        
-        }
-        
         translate([-w/2, -d/2, bottom_wall_thickness+2])
         gridfinity_baseplate(width, depth, magnetSize=magnet_size);
     }
@@ -52,22 +33,11 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wa
     }
 }
 
-module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bottom_grid, magnet_size) {
+module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bottom_grid, magnet_size, fudge) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
 
-    difference() {
-        rounded_rectangle(
-            w+(2*wall_thickness), 
-            d+(2*wall_thickness), 
-            GF_LIP_HEIGHT+top_thickness,
-            GF_BASEPLATE_ROUNDNESS,
-            chamfer_top_angle=45,
-            chamfer_top_height=2
-            );
-
-        rounded_rectangle(w+wall_thickness, d+wall_thickness, GF_LIP_HEIGHT, GF_BASEPLATE_ROUNDNESS);
-    }
+    lid(w, d, wall_thickness, top_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT, fudge);
 
     translate([-w/2, -d/2, 0])
     frame_cavity(width, depth);
