@@ -1,15 +1,15 @@
 /**
     Rectangle with rounded edges (rounded on 4 edges only)
 **/
-module rounded_rectangle(x, y, z, roundness) {
+module rounded_rectangle(x, y, z, roundness, chamfer_top_angle = 0, chamfer_top_height = 0, chamfer_bottom_angle = 0, chamfer_bottom_height = 0) {
     x_offset = x/2 - roundness/2;
     y_offset = y/2 - roundness/2;
 
-    translate([0, 0, z/2])
     hull() {
         for (coord=[[x_offset,y_offset],[x_offset,-y_offset],[-x_offset,y_offset],[-x_offset,-y_offset]])
             translate([coord.x,coord.y,0])
-            cylinder(d=roundness,h=z,$fn=360,center=true);
+            cylinder_chamfer(roundness, z, chamfer_top_angle, chamfer_top_height, chamfer_bottom_angle, chamfer_bottom_height, 360);
+            // cylinder(d=roundness,h=z,$fn=360,center=true);
     }
 }
 

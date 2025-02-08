@@ -41,13 +41,21 @@ module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bot
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
 
+    difference() {
+        rounded_rectangle(
+            w+(2*wall_thickness), 
+            d+(2*wall_thickness), 
+            GF_LIP_HEIGHT+top_thickness,
+            GF_BASEPLATE_ROUNDNESS,
+            chamfer_top_angle=45,
+            chamfer_top_height=2
+            );
+
+        rounded_rectangle(w+wall_thickness, d+wall_thickness, GF_LIP_HEIGHT, GF_BASEPLATE_HEIGHT);
+    }
+
     translate([-w/2, -d/2, 0])
     frame_cavity(width, depth);
-
-    translate([0, 0, GF_LIP_HEIGHT])
-    rounded_rectangle(w+(2*wall_thickness), d+(2*wall_thickness), top_thickness, GF_BASEPLATE_ROUNDNESS);
-
-    lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, 0);
 
     if (top_grid) {
         translate([-w/2, -d/2, GF_LIP_HEIGHT+top_thickness])
