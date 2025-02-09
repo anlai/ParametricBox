@@ -108,7 +108,7 @@ if (type == "gridfinity") {
 }
 
 function label_y_offset(depth, wall_thickness) = -((depth/2)+wall_thickness);
-function label_z_offset(height, bottom_wall_thickness, label_height) = ((height+bottom_wall_thickness)-label_height)/2;
+function label_z_offset(height, bottom_wall_thickness, label_height, stackable, lip_height) = (((height+bottom_wall_thickness)-label_height)/2)-(stackable ? 0 : lip_height);
 if (include_label) {
     label_y_offset = label_y_offset(
         type == "gridfinity" ? gf_depth*GF_BASEPLATE_UNIT_SIZE : std_depth,
@@ -117,7 +117,9 @@ if (include_label) {
     label_z_offset = label_z_offset(
         type == "gridfinity" ? gf_height*GF_UNIT_HEIGHT : std_height, //(gf_height*GF_UNIT_HEIGHT) + (stackable ? GF_LIP_HEIGHT : 0) : std_height + (stackable ? lip_height : 0),
         bottom_wall_thickness,
-        label_height
+        label_height,
+        stackable,
+        type == "gridfinity" ? GF_LIP_HEIGHT : lip_height
     );
 
     translate([0, label_y_offset, label_z_offset])
