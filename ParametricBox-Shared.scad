@@ -93,6 +93,9 @@ module body(w, d, h, wall_thickness, bottom_wall_thickness, inner_roundness, out
     }
 }
 
+/**
+    Creates the generic plain lid
+**/
 module lid(w, d, wall_thickness, top_thickness, inner_roundness, outer_roundness, lip_height, fudge) {
     difference() {
         rounded_rectangle(
@@ -134,6 +137,12 @@ module lip(w, d, h, wall_thickness, inner_roundness, outer_roundness, fudge) {
     }
 }
 
+/**
+    Creates a chamfered label holder
+
+        w: width of the label holder
+        h: height (since it's vertical)
+**/
 module label_holder(w, h) {
     z = 5; // height to ensure chamfer works
     excess_height = z-DEFUALT_CHAMFER_HEIGHT;
