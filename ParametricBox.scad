@@ -1,3 +1,4 @@
+include <ParametricBox-Constants.scad>
 use <ParametricBox-Gridfinity.scad>
 use <ParametricBox-Shared.scad>
 
@@ -45,6 +46,10 @@ if (type == "gridfinity") {
     gridfinity_lid(gf_width, gf_depth, wall_thickness, top_wall_thickness, gf_lid_top_grid, gf_lid_bottom_grid, magnet_size, fudge);
 
     gridfinity_box(gf_width, gf_depth, gf_height, wall_thickness, stackable, bottom_wall_thickness, magnet_size);
+
+    translate([0, -((gf_depth*GF_BASEPLATE_UNIT_SIZE)/2+wall_thickness), label_z_offset((gf_height*7) + (stackable ? 4.4 : 0), bottom_wall_thickness, 30)])
+    label_holder(50, 30);
+
 } else {
     translate([-std_width-20, 0, 0])
     lid(std_width, std_depth, wall_thickness, top_wall_thickness, roundness, roundness, lip_height, fudge);
