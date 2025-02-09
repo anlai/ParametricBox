@@ -14,7 +14,7 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wa
     union() {
         body(w, d, h, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
 
-        translate([-w/2, -d/2, bottom_wall_thickness+2])
+        translate([-w/2, -d/2, bottom_wall_thickness])
         gridfinity_baseplate(width, depth, magnetSize=magnet_size);
     }
 
