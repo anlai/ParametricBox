@@ -1,15 +1,7 @@
+include <ParametricBox-Constants.scad>
 use <ParametricBox-Shared.scad>
 use <gridfinity-extended/modules/module_gridfinity_baseplate_common.scad>
 use <gridfinity-extended/modules/module_gridfinity_baseplate.scad>
-
-// Gridfinity Constants
-GF_UNIT_SIZE = 41.5;
-GF_UNIT_HEIGHT = 7;
-GF_LIP_HEIGHT = 4.4;
-
-GF_BASEPLATE_UNIT_SIZE = 42;
-GF_BASEPLATE_HEIGHT = 5;
-GF_BASEPLATE_ROUNDNESS = 8;
 
 function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
