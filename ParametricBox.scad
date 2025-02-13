@@ -9,13 +9,13 @@ type = "gridfinity"; // [gridfinity, standard]
 stackable = false;
 
 // outer wall thickness
-wall_thickness = 6;
+wall_thickness = 4;
 // lid thickness (when not stackable)
 top_wall_thickness = 2;
 // bottom wall thickness (when not stackable)
 bottom_wall_thickness = 2;
 
-fudge = .1; // [0:.1:5]
+fudge = .3; // [0:.1:1]
 
 /* [Gridfinity Parameters] */
 gf_width = 5;

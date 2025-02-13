@@ -170,8 +170,8 @@ module label_holder(w, h) {
             translate([0, frame/2, (label_thickness+.1)/2])
             cube([w-frame, h, label_thickness+.1], center=true);
 
-            translate([0, window/2, .5])
-            cube([w-window, h, 1],center=true);
+            translate([0, window/2, DEFUALT_CHAMFER_HEIGHT/2])
+            cube([w-window, h, DEFUALT_CHAMFER_HEIGHT],center=true);
         }
     }
 }
