@@ -62,12 +62,16 @@ module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bot
 }
 
 module gridfinity_cavities(width, depth, scale_factor) {
-    scaled_offset_x = -((width * GF_BASEPLATE_UNIT_SIZE) * scale_factor)/2;
-    scaled_offset_y = -((depth * GF_BASEPLATE_UNIT_SIZE) * scale_factor)/2;
+    x_offset = (width % 2 == 0 ? GF_BASEPLATE_UNIT_SIZE/2 : 0) - ( floor(width/2) * GF_BASEPLATE_UNIT_SIZE );
+    y_offset = (depth % 2 == 0 ? GF_BASEPLATE_UNIT_SIZE/2 : 0) - ( floor(depth/2) * GF_BASEPLATE_UNIT_SIZE );
 
-    translate([scaled_offset_x, scaled_offset_y, 0])
-    gridcopy(width, depth, positionGridx = "center", positionGridy = "center") {
-        scale([scale_factor, scale_factor, 1])
-        frame_cavity(1, 1);
+    for (r = [0:width-1]) {        
+        for (c = [0:depth-1]) {
+            translate([x_offset,y_offset,0]) 
+            translate([c*GF_BASEPLATE_UNIT_SIZE, r*GF_BASEPLATE_UNIT_SIZE, 0])
+            scale([scale_factor, scale_factor, 1])
+            translate([-GF_BASEPLATE_UNIT_SIZE/2, -GF_BASEPLATE_UNIT_SIZE/2, 0])
+            frame_cavity(1, 1);  
+        }
     }
 }

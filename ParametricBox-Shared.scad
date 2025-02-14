@@ -174,4 +174,6 @@ module label_holder(w, h) {
             cube([w-window, h, DEFUALT_CHAMFER_HEIGHT],center=true);
         }
     }
+
+    //cube([w-frame-.5, h-(frame/2), label_thickness-.2]);
 }
