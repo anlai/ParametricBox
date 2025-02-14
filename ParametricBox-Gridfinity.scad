@@ -65,8 +65,8 @@ module gridfinity_cavities(width, depth, scale_factor) {
     x_offset = (width % 2 == 0 ? GF_BASEPLATE_UNIT_SIZE/2 : 0) - ( floor(width/2) * GF_BASEPLATE_UNIT_SIZE );
     y_offset = (depth % 2 == 0 ? GF_BASEPLATE_UNIT_SIZE/2 : 0) - ( floor(depth/2) * GF_BASEPLATE_UNIT_SIZE );
 
-    for (r = [0:width-1]) {        
-        for (c = [0:depth-1]) {
+    for (r = [0:depth-1]) {        
+        for (c = [0:width-1]) {
             translate([x_offset,y_offset,0]) 
             translate([c*GF_BASEPLATE_UNIT_SIZE, r*GF_BASEPLATE_UNIT_SIZE, 0])
             scale([scale_factor, scale_factor, 1])
