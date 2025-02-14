@@ -28,6 +28,8 @@ gf_magnet_height = 2; // [0:.1:3]
 gf_lid_top_grid = false;
 gf_lid_bottom_grid = true;
 
+gf_stacking_lip = true;
+
 /* [Standard Parameters] */
 // inside width
 std_width = 150;
@@ -73,6 +75,7 @@ if (type == "gridfinity") {
         gf_height, 
         wall_thickness, 
         stackable, 
+        gf_stacking_lip,
         bottom_wall_thickness, 
         magnet_size
         );

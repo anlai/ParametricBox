@@ -6,14 +6,14 @@ use <gridfinity-extended/modules/module_gridfinity_baseplate.scad>
 
 function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
-module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wall_thickness, magnet_size) {
+module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
     h = (height * GF_UNIT_HEIGHT) + (magnet_size.y > 0 ? magnet_size.y : 0);
 
     translate([0, 0, stackable ? GF_LIP_HEIGHT : 0])
     union() {
-        body(w, d, h, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
+        body(w, d, h+2, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
 
         translate([-w/2, -d/2, bottom_wall_thickness])
         gridfinity_baseplate(width, depth, magnetSize=magnet_size);
@@ -40,7 +40,10 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, bottom_wa
         // }
 
         // frame_cavity(width, depth);
-        lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, 0);
+
+        if (stacking_lip) {
+            lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, 0);
+        }
     }
 }
 
