@@ -19,6 +19,9 @@ jobs:
         branch: 'main'
         owner: 'ostat'
         repository: 'gridfinity_extended_openscad'
+    - name: Rename Repository
+      run: |
+        mv gridfinity_extended_openscad gridfinity-extended
     - name: Compile
       run: |
         chmod +x ./compile.sh
