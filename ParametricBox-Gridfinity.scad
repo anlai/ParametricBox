@@ -19,27 +19,9 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_
         gridfinity_baseplate(width, depth, magnetSize=magnet_size);
     }
 
-    // scale_factor = .95;
-    // scaled_offset_x = -(w * scale_factor)/2;
-    // scaled_offset_y = -(d * scale_factor)/2;
-
     if (stackable) {
 
         gridfinity_cavities(width, depth, .98);
-
-        // translate([scaled_offset_x, scaled_offset_y, 0])
-        // gridcopy(width, depth, positionGridx = "center", positionGridy = "center") {
-        //     scale([scale_factor, scale_factor, 1])
-        //     frame_cavity(1, 1);
-        // }
-
-        // translate([-w/2, -d/2, 0])
-        // gridcopy(width, depth, positionGridx="center", positionGridy="center") {
-        //     scale([.98,.98,1])
-        //     frame_cavity(1,1);
-        // }
-
-        // frame_cavity(width, depth);
 
         if (stacking_lip) {
             lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, 0);
@@ -54,9 +36,6 @@ module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bot
     lid(w, d, wall_thickness, top_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT, fudge);
 
     gridfinity_cavities(width, depth, .98);
-
-    // translate([-w/2, -d/2, 0])
-    // frame_cavity(width, depth);
 
     if (top_grid) {
         translate([-w/2, -d/2, GF_LIP_HEIGHT+top_thickness])
