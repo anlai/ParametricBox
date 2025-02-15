@@ -1,0 +1,38 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Clone Gridfinity Extended
+      uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+      with:
+        depth: 1
+        branch: 'main'
+        owner: 'ostat'
+        repository: 'gridfinity_extended_openscad'
+    - name: Compile
+      run: |
+        ./compile.sh Parametric-Box.scad
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+    - name: Tag New Version
+      uses: mathieudutour/github-tag-action@v6.2
+      with:
+        custom_tag: ${{ steps.date.outputs.date }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "v${{ steps.date.outputs.date }}"
+        files: |
+          Parametric-Box-${{ steps.date.outputs.date }}.scad
