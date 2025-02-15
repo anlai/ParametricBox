@@ -21,7 +21,8 @@ jobs:
         repository: 'gridfinity_extended_openscad'
     - name: Compile
       run: |
-        ./compile.sh Parametric-Box.scad
+        chmod +x ./compile.sh
+        ./compile.sh ParametricBox.scad
     - name: Get current date
       id: date
       run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
