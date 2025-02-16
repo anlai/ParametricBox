@@ -22,7 +22,7 @@ gf_width = 5;
 gf_depth = 5;
 gf_height = 6;
 
-gf_magnet_diameter = 6.1; // [0:.1:7]
+gf_magnet_d = 6.1; // [0:.1:7]
 gf_magnet_height = 2; // [0:.1:3]
 
 gf_lid_top_grid = false;
@@ -55,7 +55,7 @@ label_height = 20;
 module __Customizer_Limit__ () {}
 
 if (type == "gridfinity") {
-    magnet_size = calculate_magnet(gf_magnet_diameter, gf_magnet_height);
+    magnet_size = calculate_magnet(gf_magnet_d, gf_magnet_height);
 
     translate([-(gf_width*42)-(2*wall_thickness)-20, 0, 0])
     gridfinity_lid(
