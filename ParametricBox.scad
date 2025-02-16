@@ -13,7 +13,7 @@ wall_thickness = 4;
 // lid thickness (when not stackable)
 top_wall_thickness = 2;
 // bottom wall thickness (when not stackable)
-bottom_wall_thickness = 2;
+bottom_wall_thickness = 2.4;
 
 fudge = .3; // [0:.1:1]
 
@@ -24,6 +24,7 @@ gf_height = 6;
 
 gf_magnet_d = 6.1; // [0:.1:7]
 gf_magnet_height = 2; // [0:.1:3]
+gf_embed_magnets = false;
 
 gf_lid_top_grid = false;
 gf_lid_bottom_grid = true;
@@ -77,7 +78,8 @@ if (type == "gridfinity") {
         stackable, 
         gf_stacking_lip,
         bottom_wall_thickness, 
-        magnet_size
+        magnet_size,
+        gf_embed_magnets
         );
 
 } else {
