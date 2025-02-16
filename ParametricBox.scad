@@ -13,7 +13,7 @@ wall_thickness = 4;
 // lid thickness (when not stackable)
 top_wall_thickness = 2;
 // bottom wall thickness (when not stackable)
-bottom_wall_thickness = 2;
+bottom_wall_thickness = 2.4;
 
 fudge = .3; // [0:.1:1]
 
