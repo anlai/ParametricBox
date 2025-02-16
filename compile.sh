@@ -74,6 +74,15 @@ function process_file {
     done < "$filepath"
 }
 
+function addd_empty_line {
+    local filepath=$1
+
+    # Check if the last line is empty
+    if [ -n "$(tail -c 1 "$filepath")" ]; then
+        echo "" >> "$filepath"
+    fi
+}
+
 find_dependencies $pathRoot $inputFile 0
 
 echo "==output=="
@@ -83,9 +92,11 @@ outputPath="$outputFilename-$timestamp.scad"
 
 sorted=$(printf "%s\n" "${dependencies[@]}" | jq -s 'sort_by(.depth) | reverse | unique_by(.path) | .[].path')
 
+addd_empty_line "$inputFile"
 process_file "$inputFile" "$outputPath" true
 for f in $sorted; do
     unquoted=${f//\"/}
+    addd_empty_line "$unquoted"
     process_file "$unquoted" "$outputPath" false
 done
 process_file "$inputFile" "$outputPath" false
