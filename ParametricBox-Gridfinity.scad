@@ -6,12 +6,12 @@ use <gridfinity-extended/modules/module_gridfinity_baseplate.scad>
 
 function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
-module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size) {
+module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size, embed_magnets) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
-    h = height * GF_UNIT_HEIGHT;
+    h = (height * GF_UNIT_HEIGHT) + (!embed_magnets && magnet_size.y > 0 ? magnet_size.y : 0);
 
-    if (magnet_size.y > 0) {
+    if (embed_magnets && magnet_size.y > 0) {
         assert(magnet_size.y < bottom_wall_thickness, "bottom wall thickness has to be thicker than magnet thickness");
     }
 
@@ -21,11 +21,13 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_
             body(w, d, h+2, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
 
             translate([-w/2, -d/2, bottom_wall_thickness])
-            gridfinity_baseplate(width, depth, magnetSize=[0,0]);
+            gridfinity_baseplate(width, depth, magnetSize=embed_magnets ? [0,0] : magnet_size);
         }
 
-        translate([0, 0, bottom_wall_thickness - magnet_size.y])
-        gridfinity_magnets(width, depth, magnet_size.x, magnet_size.y);
+        if (embed_magnets && magnet_size.x > 0) {
+            translate([0, 0, bottom_wall_thickness - magnet_size.y])
+            gridfinity_magnets(width, depth, magnet_size.x, magnet_size.y);
+        }
     }
 
     if (stackable) {
