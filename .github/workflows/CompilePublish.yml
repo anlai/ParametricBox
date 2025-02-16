@@ -39,4 +39,4 @@ jobs:
       with:
         tag_name: "v${{ steps.date.outputs.date }}"
         files: |
-          Parametric-Box-${{ steps.date.outputs.date }}.scad
+          ParametricBox-${{ steps.date.outputs.date }}.scad
