@@ -128,5 +128,5 @@ if (include_label) {
     );
 
     translate([0, label_y_offset, label_z_offset])
-    label_holder(label_width, label_height);
+    label_holder(label_width, label_height, fudge);
 }
