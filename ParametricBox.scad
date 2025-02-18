@@ -49,9 +49,9 @@ lip_height = 5;
 include_label = true;
 
 // width of label
-label_width = 60;
+label_width = 70;
 // height of label
-label_height = 20;
+label_height = 26;
 
 module __Customizer_Limit__ () {}
 

@@ -152,28 +152,43 @@ module label_holder(w, h) {
     window = 6; // mm in from dimensions of holder for window
     label_thickness = DEFUALT_CHAMFER_HEIGHT/2;
 
-    translate([0, 0, h/2])
-    rotate([90, 0, 0])
     difference() {
-        // renders the frame, but needs cutouts
-        translate([0, 0, -excess_height])
-        difference() {
-            // label holder, face up, so front face gets the chamfer
-            rounded_rectangle(w, h, z, GF_BASEPLATE_ROUNDNESS, DEFAULT_CHAMFER_ANGLE, DEFUALT_CHAMFER_HEIGHT);
-            // cut off the excess from the shape
-            translate([0, 0, excess_offset])
-            cube([w+10,h+10,excess_height],center=true);
-        }
-
-        // cutout for the label and window
-        union() {
-            translate([0, frame/2, (label_thickness+.1)/2])
-            cube([w-frame, h, label_thickness+.1], center=true);
-
-            translate([0, window/2, DEFUALT_CHAMFER_HEIGHT/2])
-            cube([w-window, h, DEFUALT_CHAMFER_HEIGHT],center=true);
-        }
+        // label holder, face up, so front face gets the chamfer
+        rounded_rectangle(w+frame,h+frame,z, GF_BASEPLATE_ROUNDNESS, DEFAULT_CHAMFER_ANGLE, DEFUALT_CHAMFER_HEIGHT);
+        // cut off the excess from the shape
+        translate([0,0,excess_offset])
+        cube([w+frame+10,h+frame+10,excess_height],center=true);
     }
+    
 
-    //cube([w-frame-.5, h-(frame/2), label_thickness-.2]);
+
+    // translate([0, 0, h/2])
+    // rotate([90, 0, 0])
+    // difference() {
+    //     // renders the frame, but needs cutouts
+    //     translate([0, 0, -excess_height])
+    //     difference() {
+    //         // label holder, face up, so front face gets the chamfer
+    //         rounded_rectangle(w, h, z, GF_BASEPLATE_ROUNDNESS, DEFAULT_CHAMFER_ANGLE, DEFUALT_CHAMFER_HEIGHT);
+    //         // cut off the excess from the shape
+    //         translate([0, 0, excess_offset])
+    //         cube([w+10,h+10,excess_height],center=true);
+    //     }
+
+    //     // cutout for the label and window
+    //     union() {
+    //         translate([0, frame/2, (label_thickness+.1)/2])
+    //         cube([w-frame, h, label_thickness+.1], center=true);
+
+    //         translate([0, window/2, DEFUALT_CHAMFER_HEIGHT/2])
+    //         cube([w-window, h, DEFUALT_CHAMFER_HEIGHT],center=true);
+    //     }
+    // }
+
+    // //cube([w-frame-.5, h-(frame/2), label_thickness-.2]);
+
+    // echo(str("create a label with the following dimensions (x,y,z):", w-frame-.5, ",", h-(frame/2), ",", label_thickness-.2));
+
 }
+
+label_holder(65,25);
