@@ -152,6 +152,8 @@ module label_holder(w, h, fudge) {
     window = 4; // mm in from dimensions of holder for window
     label_thickness = DEFUALT_CHAMFER_HEIGHT/2;
 
+    translate([0, 0, (h+(2*frame))/2])
+    rotate([90, 0, 0])
     difference() {
         translate([0,0,-excess_height])
         difference() {
