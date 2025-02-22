@@ -1,65 +1,30 @@
 {
     "fileFormatVersion": "1",
     "parameterSets": {
-        "New set 1": {
-            "gf_depth": "5",
-            "gf_height": "6",
-            "gf_width": "5",
-            "stackable": "false",
-            "std_depth": "40",
-            "std_height": "40",
-            "std_width": "40",
-            "type": "gridfinity",
-            "wall_thickness": "4"
-        },
-        "New set 2": {
-            "gf_depth": "5",
-            "gf_height": "6",
-            "gf_width": "5",
-            "stackable": "false",
-            "std_depth": "40",
-            "std_height": "40",
-            "std_width": "40",
-            "type": "gridfinity",
-            "wall_thickness": "8"
-        },
-        "New set 3": {
-            "bottom_wall_thickness": "2",
-            "fudge": "0.10000000000000001",
-            "gf_depth": "5",
+        "GF-5x4-Stackable": {
+            "bottom_wall_thickness": "2.3999999999999999",
+            "fudge": "0.29999999999999999",
+            "gf_depth": "4",
+            "gf_embed_magnets": "false",
             "gf_height": "6",
             "gf_lid_bottom_grid": "true",
             "gf_lid_top_grid": "false",
-            "gf_magnet_diameter": "0",
-            "gf_magnet_height": "0",
-            "gf_width": "5",
-            "stackable": "false",
-            "std_depth": "40",
-            "std_height": "40",
-            "std_width": "40",
-            "top_wall_thickness": "2",
-            "type": "gridfinity",
-            "wall_thickness": "6"
-        },
-        "New set 4": {
-            "bottom_wall_thickness": "2",
-            "fudge": "0.10000000000000001",
-            "gf_depth": "5",
-            "gf_height": "6",
-            "gf_lid_bottom_grid": "true",
-            "gf_lid_top_grid": "false",
-            "gf_magnet_diameter": "6.0999999999999996",
+            "gf_magnet_d": "6.0999999999999996",
             "gf_magnet_height": "2",
+            "gf_stacking_lip": "true",
             "gf_width": "5",
+            "include_label": "true",
+            "label_height": "26",
+            "label_width": "70",
             "lip_height": "5",
             "roundness": "8",
-            "stackable": "false",
+            "stackable": "true",
             "std_depth": "150",
             "std_height": "100",
             "std_width": "150",
             "top_wall_thickness": "2",
-            "type": "standard",
-            "wall_thickness": "6"
+            "type": "gridfinity",
+            "wall_thickness": "4"
         }
     }
 }

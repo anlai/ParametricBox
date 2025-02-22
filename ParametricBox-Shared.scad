@@ -143,37 +143,33 @@ module lip(w, d, h, wall_thickness, inner_roundness, outer_roundness, fudge) {
         w: width of the label holder
         h: height (since it's vertical)
 **/
-module label_holder(w, h) {
+module label_holder(w, h, fudge) {
     z = 5; // height to ensure chamfer works
     excess_height = z-DEFUALT_CHAMFER_HEIGHT;
     excess_offset = excess_height/2;
 
     frame = 4;  // mm in from dimensions of holder for frame
-    window = 6; // mm in from dimensions of holder for window
+    window = 4; // mm in from dimensions of holder for window
     label_thickness = DEFUALT_CHAMFER_HEIGHT/2;
 
-    translate([0, 0, h/2])
+    translate([0, 0, (h+(2*frame))/2])
     rotate([90, 0, 0])
     difference() {
-        // renders the frame, but needs cutouts
-        translate([0, 0, -excess_height])
+        translate([0,0,-excess_height])
         difference() {
             // label holder, face up, so front face gets the chamfer
-            rounded_rectangle(w, h, z, GF_BASEPLATE_ROUNDNESS, DEFAULT_CHAMFER_ANGLE, DEFUALT_CHAMFER_HEIGHT);
+            rounded_rectangle(w+frame+fudge,h+frame+fudge,z, GF_BASEPLATE_ROUNDNESS, DEFAULT_CHAMFER_ANGLE, DEFUALT_CHAMFER_HEIGHT);
             // cut off the excess from the shape
-            translate([0, 0, excess_offset])
-            cube([w+10,h+10,excess_height],center=true);
+            translate([0,0,excess_offset])
+            cube([w+frame+10,h+frame+10,excess_height],center=true);
         }
-
-        // cutout for the label and window
+        
         union() {
-            translate([0, frame/2, (label_thickness+.1)/2])
-            cube([w-frame, h, label_thickness+.1], center=true);
+            translate([0,frame/2, (label_thickness+.1)/2])
+            cube([w+fudge, h+fudge, label_thickness+.1],center=true);
 
-            translate([0, window/2, DEFUALT_CHAMFER_HEIGHT/2])
+            translate([0, window, DEFUALT_CHAMFER_HEIGHT/2])
             cube([w-window, h, DEFUALT_CHAMFER_HEIGHT],center=true);
         }
     }
-
-    //cube([w-frame-.5, h-(frame/2), label_thickness-.2]);
 }
