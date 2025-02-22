@@ -45,7 +45,9 @@ module gridfinity_lid(width, depth, wall_thickness, top_thickness, top_grid, bot
 
     lid(w, d, wall_thickness, top_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT, fudge);
 
-    gridfinity_cavities(width, depth, .98);
+    if (bottom_grid) {
+        gridfinity_cavities(width, depth, .98);
+    }
 
     if (top_grid) {
         translate([-w/2, -d/2, GF_LIP_HEIGHT+top_thickness])
