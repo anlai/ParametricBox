@@ -4,11 +4,12 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - individual-components
 
 jobs:
-  publish:
+  render:
     runs-on: ubuntu-latest
+    container: openscad/openscad:dev.2025-02-17
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -22,21 +23,29 @@ jobs:
     - name: Rename Repository
       run: |
         mv gridfinity_extended_openscad gridfinity-extended
-    - name: Compile
+
+    - name: Render
       run: |
-        chmod +x ./compile.sh
-        ./compile.sh ParametricBox.scad
-    - name: Get current date
-      id: date
-      run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-    - name: Tag New Version
-      uses: mathieudutour/github-tag-action@v6.2
-      with:
-        custom_tag: ${{ steps.date.outputs.date }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: "v${{ steps.date.outputs.date }}"
-        files: |
-          ParametricBox-${{ steps.date.outputs.date }}.scad
+        openscad -o gridfinity-box-5x4-body.stl ParametricBox.scad -p ParametricBox.json "GF-5x4-Stackable-Box"
+
+        ls
+
+    
+    # - name: Compile
+    #   run: |
+    #     chmod +x ./compile.sh
+    #     ./compile.sh ParametricBox.scad
+    # - name: Get current date
+    #   id: date
+    #   run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+    # - name: Tag New Version
+    #   uses: mathieudutour/github-tag-action@v6.2
+    #   with:
+    #     custom_tag: ${{ steps.date.outputs.date }}
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Release
+    #   uses: softprops/action-gh-release@v2
+    #   with:
+    #     tag_name: "v${{ steps.date.outputs.date }}"
+    #     files: |
+    #       ParametricBox-${{ steps.date.outputs.date }}.scad
