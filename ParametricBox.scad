@@ -5,6 +5,9 @@ use <ParametricBox-Shared.scad>
 // Box Type
 type = "gridfinity"; // [gridfinity, standard]
 
+// Component
+component = "box"; // [box, lid, label]
+
 // stackable boxes
 stackable = false;
 
@@ -45,9 +48,6 @@ roundness = 8;
 lip_height = 5;
 
 /* [Label] */
-// include label holder on front
-include_label = true;
-
 // width of label
 label_width = 70;
 // height of label
@@ -58,63 +58,72 @@ module __Customizer_Limit__ () {}
 if (type == "gridfinity") {
     magnet_size = calculate_magnet(gf_magnet_d, gf_magnet_height);
 
-    translate([-(gf_width*42)-(2*wall_thickness)-20, 0, 0])
-    gridfinity_lid(
-        gf_width, 
-        gf_depth,
-        wall_thickness,
-        top_wall_thickness, 
-        gf_lid_top_grid, 
-        gf_lid_bottom_grid, 
-        magnet_size, 
-        fudge
-        );
+    // translate([-(gf_width*42)-(2*wall_thickness)-20, 0, 0])
 
-    gridfinity_box(
-        gf_width, 
-        gf_depth, 
-        gf_height, 
-        wall_thickness, 
-        stackable, 
-        gf_stacking_lip,
-        bottom_wall_thickness, 
-        magnet_size,
-        gf_embed_magnets
-        );
+    if (component == "lid") {
+        gridfinity_lid(
+            gf_width, 
+            gf_depth,
+            wall_thickness,
+            top_wall_thickness, 
+            gf_lid_top_grid, 
+            gf_lid_bottom_grid, 
+            magnet_size, 
+            fudge
+            );
+    }
+
+    if (component == "box") {
+        gridfinity_box(
+            gf_width, 
+            gf_depth, 
+            gf_height, 
+            wall_thickness, 
+            stackable, 
+            gf_stacking_lip,
+            bottom_wall_thickness, 
+            magnet_size,
+            gf_embed_magnets
+            );
+    }
 
 } else {
-    translate([-std_width-20, 0, 0])
-    lid(
-        std_width, 
-        std_depth, 
-        wall_thickness, 
-        top_wall_thickness, 
-        roundness, 
-        roundness, 
-        lip_height, 
-        fudge
-        );
+    // translate([-std_width-20, 0, 0])
+    if (component == "lid") {
+        lid(
+            std_width, 
+            std_depth, 
+            wall_thickness, 
+            top_wall_thickness, 
+            roundness, 
+            roundness, 
+            lip_height, 
+            fudge
+            );
+    }
     
-    translate([0, 0, stackable ? lip_height : 0])
-    body(
-        std_width, 
-        std_depth, 
-        std_height,
-        wall_thickness,
-        bottom_wall_thickness,
-        roundness,
-        roundness,
-        lip_height
-        );
+    if (component == "box") {
+        translate([0, 0, stackable ? lip_height : 0])
+        body(
+            std_width, 
+            std_depth, 
+            std_height,
+            wall_thickness,
+            bottom_wall_thickness,
+            roundness,
+            roundness,
+            lip_height
+            );
 
-    if (stackable) {
-        lip(std_width, std_depth, lip_height, wall_thickness, roundness, roundness, fudge);
+        if (stackable) {
+            lip(std_width, std_depth, lip_height, wall_thickness, roundness, roundness, fudge);
+        }
     }
 }
 
 function label_y_offset(depth, wall_thickness) = -((depth/2)+wall_thickness);
 function label_z_offset(height, bottom_wall_thickness, label_height, stackable, lip_height) = (((height+bottom_wall_thickness)-label_height)/2)-(stackable ? 0 : lip_height);
-if (include_label) {
+if (component == "label") {
     label_y_offset = label_y_offset(
         type == "gridfinity" ? gf_depth*GF_BASEPLATE_UNIT_SIZE : std_depth,
         wall_thickness
