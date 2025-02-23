@@ -1,7 +1,7 @@
 {
     "fileFormatVersion": "1",
     "parameterSets": {
-        "GF-5x4-Stackable-Box": {
+        "gridfinity-5x4-stackable-box": {
             "bottom_wall_thickness": "2.3999999999999999",
             "fudge": "0.4",
             "gf_depth": "4",
@@ -26,7 +26,7 @@
             "wall_thickness": "4",
             "component": "box"
         },
-        "GF-5x4-Stackable-Lid": {
+        "gridfinity-5x4-stackable-lid": {
             "bottom_wall_thickness": "2.3999999999999999",
             "fudge": "0.3",
             "gf_depth": "4",
@@ -51,7 +51,7 @@
             "wall_thickness": "4",
             "component": "lid"
         },
-        "GF-5x4-Stackable-Label": {
+        "gridfinity-5x4-stackable-label": {
             "bottom_wall_thickness": "2.3999999999999999",
             "fudge": "0.3",
             "gf_depth": "4",
