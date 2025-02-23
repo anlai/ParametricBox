@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     container: openscad/openscad:dev.2025-02-17
     steps:
+    - name: Install Git
+      run: |
+        sudo apt install git -y
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
