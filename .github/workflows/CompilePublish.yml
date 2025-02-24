@@ -53,7 +53,8 @@ jobs:
       with:
         tag_name: "v${{ steps.tag.outputs.tag }}"
         files: |
-          *${{ steps.tag.outputs.date }}*
+          ParametricBox-${{ steps.tag.outputs.date }}.scad
+          *.stl
         
 
     # - name: Compile
