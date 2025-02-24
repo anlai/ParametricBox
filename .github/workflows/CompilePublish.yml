@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - individual-components
+      - main
 
 jobs:
   render:
@@ -46,7 +46,11 @@ jobs:
 
         ./render.sh $scadfile $tag
 
-        ls
+    - name: Tag New Version
+      uses: mathieudutour/github-tag-action@v6.2
+      with:
+        custom_tag: ${{ steps.tag.outputs.tag }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Release
       uses: softprops/action-gh-release@v2
@@ -55,33 +59,3 @@ jobs:
         files: |
           ${{ steps.compile.outputs.scadfile }}
           *.stl
-        
-
-    # - name: Compile
-    #   run: ./compile.sh ParametricBox.scad
-
-    # - name: Render
-    #   run: |
-    #     openscad -o gridfinity-box-5x4-body.stl ParametricBox.scad -p ParametricBox.json -P "GF-5x4-Stackable-Box"
-
-    #     ls
-
-    
-    # - name: Compile
-    #   run: |
-    #     chmod +x ./compile.sh
-    #     ./compile.sh ParametricBox.scad
-    # - name: Get current date
-    #   id: date
-    #   run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-    # - name: Tag New Version
-    #   uses: mathieudutour/github-tag-action@v6.2
-    #   with:
-    #     custom_tag: ${{ steps.date.outputs.date }}
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    # - name: Release
-    #   uses: softprops/action-gh-release@v2
-    #   with:
-    #     tag_name: "v${{ steps.date.outputs.date }}"
-    #     files: |
-    #       ParametricBox-${{ steps.date.outputs.date }}.scad
