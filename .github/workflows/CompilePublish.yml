@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Install Git
       run: |
-        apt install git -y
+        apt install git jq -y
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
