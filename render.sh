@@ -18,5 +18,5 @@ jq -r '.parameterSets | keys[]' "$JSON_FILE" | while read -r key; do
     echo "Rendering: $key"
     # Perform any additional operations on each key here
     filename="$key-$tag.stl"
-    openscad -o "$filename" $scadfile -p "$JSON_FILE" -p "$key"
+    openscad -o "$filename" $scadfile -p "$JSON_FILE" -P "$key"
 done
