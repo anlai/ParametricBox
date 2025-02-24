@@ -27,11 +27,23 @@ jobs:
       run: |
         mv gridfinity_extended_openscad gridfinity-extended
 
-    - name: Render
-      run: |
-        openscad -o gridfinity-box-5x4-body.stl ParametricBox.scad -p ParametricBox.json -P "GF-5x4-Stackable-Box"
+    - name: Generate Tag
+      id: tag
+      run: echo "date=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
 
-        ls
+    - name: Compile
+      run: |
+        date=${{ steps.tag.outputs.date }}
+        echo $date
+
+    # - name: Compile
+    #   run: ./compile.sh ParametricBox.scad
+
+    # - name: Render
+    #   run: |
+    #     openscad -o gridfinity-box-5x4-body.stl ParametricBox.scad -p ParametricBox.json -P "GF-5x4-Stackable-Box"
+
+    #     ls
 
     
     # - name: Compile

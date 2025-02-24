@@ -10,8 +10,12 @@ then
     exit 1
 fi
 
+ver=$(date +'%Y%m%d-%H')
+echo $ver
 # Extract and loop over the keys of parameterSets
 jq -r '.parameterSets | keys[]' "$JSON_FILE" | while read -r key; do
-    echo "Processing: $key"
+    echo "Rendering: $key"
     # Perform any additional operations on each key here
+    filename="$key-$ver.stl"
+    openscad -o "$filename" ParametricBox.scad -p ParametricBox.json -p "$key"
 done

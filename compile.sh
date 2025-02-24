@@ -87,7 +87,7 @@ find_dependencies $pathRoot $inputFile 0
 
 echo "==output=="
 outputFilename=$(echo "$inputFilename" | sed 's/\.[^.]*$//')
-timestamp=$(date +"%Y%m%d")
+timestamp=$(date +"%Y%m%d-%H")
 outputPath="$outputFilename-$timestamp.scad"
 
 sorted=$(printf "%s\n" "${dependencies[@]}" | jq -s 'sort_by(.depth) | reverse | unique_by(.path) | .[].path')
