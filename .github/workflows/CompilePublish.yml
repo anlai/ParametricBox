@@ -29,15 +29,25 @@ jobs:
 
     - name: Generate Tag
       id: tag
-      run: echo "date=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
+      run: echo "tag=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
 
     - name: Compile
+      id: compile
       run: |
-        date=${{ steps.tag.outputs.date }}
-        echo $date
+        tag=${{ steps.tag.outputs.tag }}
+        ./compile.sh ParametricBox.scad $tag
 
-        ./test.sh 'testfile.txt' $date
-        ./test.sh 'secondfile.txt'
+        echo "scadfile=ParametricBox-$tag.scad" > $GITHUB_OUTPUT
+
+    - name: Render
+      run: |
+        scadfile=${{ steps.compile.outputs.scadfile }}
+        tag=${{ steps.tag.outputs.tag }}
+
+        ./render.sh $scadfile $tag
+
+        ls
+
 
     # - name: Compile
     #   run: ./compile.sh ParametricBox.scad

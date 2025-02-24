@@ -1,5 +1,8 @@
 #!/bin/bash
 
+scadfile="$1"
+tag="$2"
+
 # Define the JSON file path
 JSON_FILE="ParametricBox.json"
 
@@ -10,12 +13,10 @@ then
     exit 1
 fi
 
-ver=$(date +'%Y%m%d-%H')
-echo $ver
 # Extract and loop over the keys of parameterSets
 jq -r '.parameterSets | keys[]' "$JSON_FILE" | while read -r key; do
     echo "Rendering: $key"
     # Perform any additional operations on each key here
-    filename="$key-$ver.stl"
-    openscad -o "$filename" ParametricBox.scad -p ParametricBox.json -p "$key"
+    filename="$key-$tag.stl"
+    openscad -o "$filename" $scadfile -p "$JSON_FILE" -p "$key"
 done
