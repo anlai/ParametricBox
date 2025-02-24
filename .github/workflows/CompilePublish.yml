@@ -36,6 +36,9 @@ jobs:
         date=${{ steps.tag.outputs.date }}
         echo $date
 
+        ./test.sh 'testfile.txt' $date
+        ./test.sh 'secondfile.txt'
+
     # - name: Compile
     #   run: ./compile.sh ParametricBox.scad
 
