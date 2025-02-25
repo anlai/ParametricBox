@@ -7,9 +7,13 @@ on:
       - main
 
 jobs:
-  publish:
+  render:
     runs-on: ubuntu-latest
+    container: openscad/openscad:dev.2025-02-17
     steps:
+    - name: Install Git
+      run: |
+        apt install git jq -y
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
@@ -22,21 +26,36 @@ jobs:
     - name: Rename Repository
       run: |
         mv gridfinity_extended_openscad gridfinity-extended
+
+    - name: Generate Tag
+      id: tag
+      run: echo "tag=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
+
     - name: Compile
+      id: compile
       run: |
-        chmod +x ./compile.sh
-        ./compile.sh ParametricBox.scad
-    - name: Get current date
-      id: date
-      run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+        tag=${{ steps.tag.outputs.tag }}
+        ./compile.sh ParametricBox.scad $tag
+
+        echo "scadfile=ParametricBox-$tag.scad" > $GITHUB_OUTPUT
+
+    - name: Render
+      run: |
+        scadfile=${{ steps.compile.outputs.scadfile }}
+        tag=${{ steps.tag.outputs.tag }}
+
+        ./render.sh $scadfile $tag
+
     - name: Tag New Version
       uses: mathieudutour/github-tag-action@v6.2
       with:
-        custom_tag: ${{ steps.date.outputs.date }}
+        custom_tag: ${{ steps.tag.outputs.tag }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: "v${{ steps.date.outputs.date }}"
+        tag_name: "v${{ steps.tag.outputs.tag }}"
         files: |
-          ParametricBox-${{ steps.date.outputs.date }}.scad
+          ${{ steps.compile.outputs.scadfile }}
+          *.stl
