@@ -83,7 +83,8 @@ if (type == "gridfinity") {
             gf_stacking_lip,
             bottom_wall_thickness, 
             magnet_size,
-            gf_embed_magnets
+            gf_embed_magnets,
+            fudge
             );
     }
 

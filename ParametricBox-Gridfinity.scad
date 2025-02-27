@@ -6,7 +6,7 @@ use <gridfinity-extended/modules/module_gridfinity_baseplate.scad>
 
 function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
-module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size, embed_magnets) {
+module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size, embed_magnets, fudge) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
     h = (height * GF_UNIT_HEIGHT) + (!embed_magnets && magnet_size.y > 0 ? magnet_size.y : 0);
@@ -34,7 +34,7 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_
         gridfinity_cavities(width, depth, .98);
 
         if (stacking_lip) {
-            lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, 0);
+            lip(w, d, GF_LIP_HEIGHT, wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, fudge);
         }
     }
 }
