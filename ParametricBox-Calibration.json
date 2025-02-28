@@ -1,0 +1,10 @@
+{
+    "fileFormatVersion": "1",
+    "parameterSets": {
+        "New set 1": {
+            "gfg_magnet_diameter": "6.0999999999999996",
+            "gfg_magnet_height": "2",
+            "part": "stacking_tolerance"
+        }
+    }
+}
