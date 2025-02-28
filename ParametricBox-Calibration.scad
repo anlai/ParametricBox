@@ -51,4 +51,12 @@ if (part == "stacking_tolerance") {
     translate([side+wall_thickness+10,0,0])
     lid(side, side, wall_thickness, top_bottom_thickness, roundness, roundness, lip, st_fudge);
 
+    translate([-(side+wall_thickness+10),0,0])
+    {
+        translate([0,0,lip])
+        body(side, side, height, wall_thickness, top_bottom_thickness, roundness, roundness, lip);
+
+        lip(side, side, lip, wall_thickness, roundness, roundness, st_fudge);
+    }
+
 }

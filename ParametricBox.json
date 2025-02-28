@@ -4,7 +4,7 @@
         "gridfinity-5x4-stackable-box": {
             "bottom_wall_thickness": "2.3999999999999999",
             "component": "box",
-            "fudge": "0.4",
+            "fudge": "0.3",
             "gf_depth": "4",
             "gf_embed_magnets": "false",
             "gf_height": "6",
