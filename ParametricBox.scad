@@ -124,7 +124,8 @@ if (type == "gridfinity") {
 
 function label_y_offset(depth, wall_thickness) = -((depth/2)+wall_thickness);
 function label_z_offset(height, bottom_wall_thickness, label_height, stackable, lip_height) = (((height+bottom_wall_thickness)-label_height)/2)-(stackable ? 0 : lip_height);
-if (component == "label") {
+
+if (component == "box") {
     label_y_offset = label_y_offset(
         type == "gridfinity" ? gf_depth*GF_BASEPLATE_UNIT_SIZE : std_depth,
         wall_thickness
@@ -139,4 +140,8 @@ if (component == "label") {
 
     translate([0, label_y_offset, label_z_offset])
     label_holder(label_width, label_height, fudge);
+}
+
+if (component == "label") {
+    cube([label_width, label_height, .8]);
 }
