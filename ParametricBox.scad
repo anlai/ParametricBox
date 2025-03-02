@@ -24,6 +24,8 @@ fudge = .3; // [0:.1:1]
 gf_width = 5;
 gf_depth = 5;
 gf_height = 6;
+// additional height in mm to add
+gf_extra_height = 2; 
 
 gf_magnet_d = 6.1; // [0:.1:7]
 gf_magnet_height = 2; // [0:.1:3]
@@ -78,6 +80,7 @@ if (type == "gridfinity") {
             gf_width, 
             gf_depth, 
             gf_height, 
+            gf_extra_height,
             wall_thickness, 
             stackable, 
             gf_stacking_lip,
@@ -125,7 +128,7 @@ if (type == "gridfinity") {
 function label_y_offset(depth, wall_thickness) = -((depth/2)+wall_thickness);
 function label_z_offset(height, bottom_wall_thickness, label_height, stackable, lip_height) = (((height+bottom_wall_thickness)-label_height)/2)-(stackable ? 0 : lip_height);
 
-if (component == "box") {
+if (component == "box" && label_width > 0 && label_height > 0) {
     label_y_offset = label_y_offset(
         type == "gridfinity" ? gf_depth*GF_BASEPLATE_UNIT_SIZE : std_depth,
         wall_thickness
