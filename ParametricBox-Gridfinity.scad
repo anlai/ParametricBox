@@ -6,10 +6,10 @@ use <gridfinity-extended/modules/module_gridfinity_baseplate.scad>
 
 function calculate_magnet(d, h) = d > 0 && h > 0 ? [d, h] : [0,0];
 
-module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size, embed_magnets, fudge) {
+module gridfinity_box(width, depth, height, extra_height, wall_thickness, stackable, stacking_lip, bottom_wall_thickness, magnet_size, embed_magnets, fudge) {
     w = width * GF_BASEPLATE_UNIT_SIZE;
     d = depth * GF_BASEPLATE_UNIT_SIZE;
-    h = (height * GF_UNIT_HEIGHT) + (!embed_magnets && magnet_size.y > 0 ? magnet_size.y : 0);
+    h = (height * GF_UNIT_HEIGHT) + (!embed_magnets && magnet_size.y > 0 ? magnet_size.y : 0) + 3.5; // gf height + lift from magents + stacking lip (3.5 seems to be the norm vs the 4.4 in the spec)
 
     if (embed_magnets && magnet_size.y > 0) {
         assert(magnet_size.y < bottom_wall_thickness, "bottom wall thickness has to be thicker than magnet thickness");
@@ -18,7 +18,7 @@ module gridfinity_box(width, depth, height, wall_thickness, stackable, stacking_
     translate([0, 0, stackable ? GF_LIP_HEIGHT : 0])
     difference() {
         union() {
-            body(w, d, h+2, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
+            body(w, d, h+extra_height, wall_thickness, bottom_wall_thickness, GF_BASEPLATE_ROUNDNESS, GF_BASEPLATE_ROUNDNESS, GF_LIP_HEIGHT);
 
             translate([-w/2, -d/2, bottom_wall_thickness])
             gridfinity_baseplate(width, depth, magnetSize=embed_magnets ? [0,0] : magnet_size);
