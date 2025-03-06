@@ -17,7 +17,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
-      uses: actions/checkout@4
+      uses: actions/checkout@v4
       with:
         ref: 86049679046a15d078b444832ecba6c0cc0b5725
         repository: ostat/gridfinity_extended_openscad
