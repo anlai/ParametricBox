@@ -20,12 +20,14 @@ jobs:
       uses: GuillaumeFalourd/clone-github-repo-action@v2.3
       with:
         depth: 1
-        branch: '86049679046a15d078b444832ecba6c0cc0b5725'
+        branch: 'main'
         owner: 'ostat'
         repository: 'gridfinity_extended_openscad'
     - name: Rename Repository
       run: |
         mv gridfinity_extended_openscad gridfinity-extended
+        cd gridfinity-extended
+        git checkout 86049679046a15d078b444832ecba6c0cc0b5725
 
     - name: Generate Tag
       id: tag
