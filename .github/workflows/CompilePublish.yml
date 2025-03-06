@@ -35,8 +35,7 @@ jobs:
     - name: Generate Tag
       id: tag
       run:  | 
-        # echo "tag=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
-        
+        git config --global --add safe.directory $(pwd)
         tag=$(./generateTag.sh 1)
         echo "$tag" > $GITHUB_OUTPUT
 
