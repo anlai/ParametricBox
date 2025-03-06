@@ -17,17 +17,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
-      uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+      uses: actions/checkout@4
       with:
-        depth: 1
-        branch: 'main'
-        owner: 'ostat'
-        repository: 'gridfinity_extended_openscad'
+        ref: 86049679046a15d078b444832ecba6c0cc0b5725
+        repository: ostat/gridfinity_extended_openscad
+      # uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+      # with:
+      #   depth: 1
+      #   branch: 'main'
+      #   owner: 'ostat'
+      #   repository: 'gridfinity_extended_openscad'
     - name: Rename Repository
       run: |
+        ls
         mv gridfinity_extended_openscad gridfinity-extended
-        cd gridfinity-extended
-        git checkout 86049679046a15d078b444832ecba6c0cc0b5725
+        ls
 
     - name: Generate Tag
       id: tag
