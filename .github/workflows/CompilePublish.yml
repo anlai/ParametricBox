@@ -37,7 +37,7 @@ jobs:
       run:  | 
         git config --global --add safe.directory $(pwd)
         tag=$(./generateTag.sh 1)
-        echo "$tag" > $GITHUB_OUTPUT
+        echo "$tag" >> $GITHUB_OUTPUT
 
     - name: Compile
       id: compile
