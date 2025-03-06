@@ -34,7 +34,11 @@ jobs:
 
     - name: Generate Tag
       id: tag
-      run: echo "tag=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
+      run:  | 
+        # echo "tag=$(date +%Y%m%d-%H)" > $GITHUB_OUTPUT
+        
+        tag=$(./generateTag.sh 1)
+        echo "$tag" > $GITHUB_OUTPUT
 
     - name: Compile
       id: compile
