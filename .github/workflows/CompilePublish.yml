@@ -36,7 +36,7 @@ jobs:
       id: tag
       run:  | 
         git config --global --add safe.directory $(pwd)
-        version=$(./generateTag.sh 1)
+        version=$(./generateVersion.sh 1)
         echo "version=$version" >> $GITHUB_OUTPUT
         echo "tag=v$version" >> $GITHUB_OUTPUT
 
