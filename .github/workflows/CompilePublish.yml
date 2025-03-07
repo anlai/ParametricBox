@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - gf-extended-version
+      - main
 
 jobs:
   render:
@@ -22,16 +22,6 @@ jobs:
         ref: 86049679046a15d078b444832ecba6c0cc0b5725
         repository: ostat/gridfinity_extended_openscad
         path: gridfinity-extended
-      # uses: GuillaumeFalourd/clone-github-repo-action@v2.3
-      # with:
-      #   depth: 1
-      #   branch: 'main'
-      #   owner: 'ostat'
-      #   repository: 'gridfinity_extended_openscad'
-    - name: Rename Repository
-      run: |
-        ls
-
     - name: Generate Tag
       id: tag
       run:  | 
