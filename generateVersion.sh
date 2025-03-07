@@ -14,14 +14,14 @@ if [ -n "$latest_tag" ]; then
 
     if [[ "$current_major" == "$major" ]]; then
         new_minor=$((minor+1))
-        new_version="v$major.$new_minor.0"
+        new_version="$major.$new_minor.0"
         echo "$new_version"
     else
-        echo "v$current_major.0.0"
+        echo "$current_major.0.0"
     fi
 
 else
 
-    echo "v$current_major.0.0"
+    echo "$current_major.0.0"
 
 fi
