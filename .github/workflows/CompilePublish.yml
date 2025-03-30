@@ -31,7 +31,7 @@ jobs:
         echo "tag=v$version" >> $GITHUB_OUTPUT
 
     - name: compiled and render
-      uses: anlai/openscad-render-action@initial
+      uses: anlai/openscad-render-action@ab7d32acf0e2c19ba0e4b033d38258241c3fead5
       with:
         scad-file: ParametricBox.scad
     
