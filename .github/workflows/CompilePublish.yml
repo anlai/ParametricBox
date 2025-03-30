@@ -13,6 +13,7 @@ jobs:
     steps:
     - name: Install Git
       run: |
+        apt-get update
         apt-get install git jq -y
     - name: Checkout
       uses: actions/checkout@v4
