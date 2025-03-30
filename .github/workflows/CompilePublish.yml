@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - github-action
 
 jobs:
   render:
@@ -30,31 +30,41 @@ jobs:
         echo "version=$version" >> $GITHUB_OUTPUT
         echo "tag=v$version" >> $GITHUB_OUTPUT
 
-    - name: Compile
-      id: compile
-      run: |
-        tag=${{ steps.tag.outputs.tag }}
-        ./compile.sh ParametricBox.scad $tag
-
-        echo "scadfile=ParametricBox-$tag.scad" > $GITHUB_OUTPUT
-
-    - name: Render
-      run: |
-        scadfile=${{ steps.compile.outputs.scadfile }}
-        tag=${{ steps.tag.outputs.tag }}
-
-        ./render.sh $scadfile $tag
-
-    - name: Tag New Version
-      uses: mathieudutour/github-tag-action@v6.2
+    - name: compiled and render
+      uses: anlai/openscad-render-action@initial
       with:
-        custom_tag: ${{ steps.tag.outputs.version }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        scad-file: ParametricBox.scad
+    
+    - name: verify
+      run: |
+        ls
+        ls ./output
 
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: "${{ steps.tag.outputs.tag }}"
-        files: |
-          ${{ steps.compile.outputs.scadfile }}
-          *.stl
+    # - name: Compile
+    #   id: compile
+    #   run: |
+    #     tag=${{ steps.tag.outputs.tag }}
+    #     ./compile.sh ParametricBox.scad $tag
+
+    #     echo "scadfile=ParametricBox-$tag.scad" > $GITHUB_OUTPUT
+
+    # - name: Render
+    #   run: |
+    #     scadfile=${{ steps.compile.outputs.scadfile }}
+    #     tag=${{ steps.tag.outputs.tag }}
+
+    #     ./render.sh $scadfile $tag
+
+    # - name: Tag New Version
+    #   uses: mathieudutour/github-tag-action@v6.2
+    #   with:
+    #     custom_tag: ${{ steps.tag.outputs.version }}
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Release
+    #   uses: softprops/action-gh-release@v2
+    #   with:
+    #     tag_name: "${{ steps.tag.outputs.tag }}"
+    #     files: |
+    #       ${{ steps.compile.outputs.scadfile }}
+    #       *.stl
