@@ -9,12 +9,12 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
-    container: openscad/openscad:dev.2025-02-17
+    # container: openscad/openscad:dev.2025-02-17
     steps:
-    - name: Install Git
-      run: |
-        apt-get update
-        apt-get install git jq -y
+    # - name: Install Git
+    #   run: |
+    #     apt-get update
+    #     apt-get install git jq -y
     - name: Checkout
       uses: actions/checkout@v4
     - name: Clone Gridfinity Extended
@@ -23,13 +23,13 @@ jobs:
         ref: 86049679046a15d078b444832ecba6c0cc0b5725
         repository: ostat/gridfinity_extended_openscad
         path: gridfinity-extended
-    - name: Generate Tag
-      id: tag
-      run:  | 
-        git config --global --add safe.directory $(pwd)
-        version=$(./generateVersion.sh 1)
-        echo "version=$version" >> $GITHUB_OUTPUT
-        echo "tag=v$version" >> $GITHUB_OUTPUT
+    # - name: Generate Tag
+    #   id: tag
+    #   run:  | 
+    #     git config --global --add safe.directory $(pwd)
+    #     version=$(./generateVersion.sh 1)
+    #     echo "version=$version" >> $GITHUB_OUTPUT
+    #     echo "tag=v$version" >> $GITHUB_OUTPUT
 
     - name: compiled and render
       uses: anlai/openscad-render-action@initial
@@ -40,6 +40,8 @@ jobs:
       run: |
         ls
         ls ./output
+
+    # =======
 
     # - name: Compile
     #   id: compile
