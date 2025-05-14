@@ -16,13 +16,13 @@ Requirements:
 
 | Parameter Name | Value Type | Default Value | Description |
 | --- | --- | --- | --- |
-| type | string | gridfinity | |
-| component | string | box | <br/>options: box, lid, label |
-| stackable | boolean | false | |
-| wall_thickness | float | 4 | |
-| top_wall_thickness | float | 2 | |
-| bottom_wall_thickness | float | 2.4 | |
-| fudge | float | .3 | <br/>between 0-1 with .1 increments |
+| type | string | gridfinity | type of box to generate <br/>**options**: gridfinity, standard |
+| component | string | box | which component to render <br/>**options**: box, lid, label |
+| stackable | boolean | false | toggle for stacking lip on the bottom of the box, otherwise has a flat bottom |
+| wall_thickness | float | 4 | thickness (mm) of the main body of the box |
+| lid_thickness | float | 2 | thickness (mm) of the lid |
+| bottom_wall_thickness | float | 2.4 | thickness (mm) of the bottom of the box, when not stackable |
+| fudge | float | .3 | tolerance to add to parts to compensate for printing tolerances of your printer, larger selection gives more wiggle room <br/>**selection**: between 0-1 with .1 increments |
 
 **Gridfinity**
 
