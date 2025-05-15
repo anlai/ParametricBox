@@ -45,27 +45,21 @@ These parameters apply specifically to Gridfinity boxes.
 
 **Standard**
 
+These parameters apply when in standard mode (generating a box that does not have any Gridfinity components)
+
 | Parameter Name | Value Type | Default Value | Description |
 | --- | --- | --- | --- |
-| std_width | 
-| std_depth | 
-| std_height | 
-| roundness | 
-| lip_height | 
+| std_width | float | 150 | width of the inside of the box in mm |
+| std_depth | float | 150 | depth of the inside of the box in mm |
+| std_height | float | 100 | height of the inside of the box in mm |
+| roundness | float | 8 | roundness of the corners of the box, calculated as a curve around a cylinder with diameter roundness |
+| lip_height | float 26 | height of the stacking lip |
 
 **Label**
 
+Parameters specific to the label dimensions, note that text should be added after in your slicer so it can accomodate your needs.
+
 | Parameter Name | Value Type | Default Value | Description |
 | --- | --- | --- | --- |
-| label_width | 
-| label_height | 
-
-Parameters that you can configure:
-
-Gridfinity vs Standard box
-Stackable, creates a lip around the bottom so that a box can be stacked on a box of the same size
-When generating a Gridfinity box, define size in terms of Gridfinity units
-Select if you want to have magnet holes for the Gridfinity base (and magnet diameter), default size is 6x2mm magnets
-When defining Standard box, define size by mm
-Generate a flat label, text can be added by your favorite slicer
-The scad library leverages the excellent Gridfinity Extended library to generate the Gridfinity specific components.
+| label_width | float | 70 | width of the label |
+| label_height | float | 26 | height of the label |
