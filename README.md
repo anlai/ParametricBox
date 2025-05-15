@@ -1,5 +1,7 @@
 # Parametric Box
  
+![assorted printed Gridfinity boxes](./images/assorted-gridfinity-boxes.jpg)
+
 A Gridfinity compatible parametric box that can be filled with Gridfinity bins and sizes of your choosing, you can configure the # of units (and height) from using the parametric configuration.  The sample sizes are 5x4x6u and 2x2x6u.  The bins are stackable and can be configured with Gridfinity bases on the outside to hook into your existing Gridfinity bases.
 
 The generator is also capable of generating boxes that do not have the Gridfinity slots as well (and can be defined by a size of your choosing).
