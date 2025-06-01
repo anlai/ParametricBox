@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: anlai/pr-changelog-action@initial
+    - uses: anlai/pr-changelog-action
       with:
         action: 'generate'
