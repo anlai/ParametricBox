@@ -8,10 +8,7 @@ on:
 
 jobs:
   changelog:
-    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
 
-    - uses: anlai/pr-changelog-action@main
-      with:
-        action: 'generate'
+    - uses: anlai/pr-changelog-action/generate@main
