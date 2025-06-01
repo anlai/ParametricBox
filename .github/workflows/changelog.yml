@@ -1,0 +1,17 @@
+name: Generate Changelog
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+
+jobs:
+  changelog:
+    # if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: anlai/pr-changelog-action@initial
+      with:
+        action: 'generate'
