@@ -19,7 +19,7 @@ jobs:
         repository: ostat/gridfinity_extended_openscad
         path: gridfinity-extended
     - name: compiled and render
-      uses: anlai/openscad-render-action@initial
+      uses: anlai/openscad-render-action@main
       with:
         scad-file: ParametricBox.scad
         openscad-version: 'dev.2025-02-17'
