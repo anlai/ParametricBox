@@ -14,7 +14,7 @@ stackable = false;
 // outer wall thickness
 wall_thickness = 4;
 // lid thickness (when not stackable)
-top_wall_thickness = 2;
+lid_thickness = 2;
 // bottom wall thickness (when not stackable)
 bottom_wall_thickness = 2.4;
 
@@ -67,7 +67,7 @@ if (type == "gridfinity") {
             gf_width, 
             gf_depth,
             wall_thickness,
-            top_wall_thickness, 
+            lid_thickness, 
             gf_lid_top_grid, 
             gf_lid_bottom_grid, 
             magnet_size, 
@@ -98,7 +98,7 @@ if (type == "gridfinity") {
             std_width, 
             std_depth, 
             wall_thickness, 
-            top_wall_thickness, 
+            lid_thickness, 
             roundness, 
             roundness, 
             lip_height, 

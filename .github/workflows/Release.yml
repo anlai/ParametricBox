@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: ''
+        required: true
+        default: 'NOT_SET'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # compile and render the scad files
+    - name: Clone Gridfinity Extended
+      uses: actions/checkout@v4
+      with:
+        ref: 86049679046a15d078b444832ecba6c0cc0b5725
+        repository: ostat/gridfinity_extended_openscad
+        path: gridfinity-extended
+    - name: compiled and render
+      uses: anlai/openscad-render-action@main
+      with:
+        scad-file: ParametricBox.scad
+        openscad-version: 'dev.2025-02-17'
+        tag: "v${{ github.event.inputs.tag }}"
+    - name: verify output
+      run: |
+        ls ./output
+
+    # update the changelog with the latest version
+    - name: Get Pending Changes
+      uses: anlai/pr-changelog-action/latest-changes@main
+      id: latest-changes
+    - name: Update Changelog with Version
+      uses: anlai/pr-changelog-action/tag-release@main
+      with:
+        tag: "${{ inputs.tag }}"
+    - name: Commit Changelog Changes
+      uses: stefanzweifel/git-auto-commit-action@master
+      with:
+        commit_message: "tagged version ${{ inputs.tag }}"      
+
+    # create release
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "v${{ github.event.inputs.tag }}"
+        files: |
+          ./output/*
